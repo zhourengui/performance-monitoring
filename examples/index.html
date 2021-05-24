@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PerformanceMonitoring Example</title>
+  <style>
+    .button {
+      background: violet;
+      color: #fff;
+      border-radius: 10px;
+      padding: 10px 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>PerformanceMonitoring</h1>
+  <span class="button" id="network-error-btn">测试捕获网络错误</span>
+  <span class="button" id="global-error-btn">测试全局捕获全局信息</span>
+  <span class="button" id="promise-error-btn">测试未处理的Promise错误</span>
+  <script src="../src/index.ts"></script>
+  <script>
+    document.querySelector("#network-error-btn").onclick = function() {
+      const image = document.createElement("img")
+      image.src = "http://fghjk"
+      document.documentElement.appendChild(image)
+    }
+    document.querySelector("#global-error-btn").onclick = function() {
+      console.log(e)
+    }
+    document.querySelector("#promise-error-btn").onclick = function() {
+      Promise.reject(new Error("Rejected"))
+    }
+  </script>
+</body>
+</html>

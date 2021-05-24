@@ -1,0 +1,14 @@
+{
+  "name": "error-trace",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "webpack"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.3",
+    "webpack": "^5.37.1",
+    "webpack-cli": "^4.7.0"
+  }
+}

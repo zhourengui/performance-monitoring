@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PerformanceMonitoring 错误录制回放</title>
+  <style>
+    .button {
+      background: violet;
+      color: #fff;
+      border-radius: 10px;
+      padding: 10px 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>PerformanceMonitoring 错误录制回放</h1>
+  <span class="button" id="err-trace-btn">测试错误录制回放</span>
+  <div id="player"></div>
+  <script src="https://cdn.jsdelivr.net/npm/rrweb@latest/dist/rrweb.min.js"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/rrweb-player@latest/dist/style.css"
+  />
+  <script src="https://cdn.jsdelivr.net/npm/rrweb-player@latest/dist/index.js"></script>
+  <script src="./mini-pm.umd.js"></script>
+  <script>
+    new miniPm({
+      captureError: true,
+      logDomain: "http://localhost:1234",
+      errEventRoute: "/err-events",
+      errLogRoute: "/err-traceback"
+    })
+  </script>
+  <script>
+    document.querySelector("#err-trace-btn").onclick = () => {
+      console.error(e)
+    }
+  </script>
+  <script>
+    setInterval(() => {
+      fetch("http://localhost:1234/get-err-events").then(req => req.json()).then(res => {
+        document.querySelector("#player").innerHTML = ""
+        new rrwebPlayer({
+          target: document.querySelector("#player"), // 可以自定义 DOM 元素
+          // 配置项
+          props: {
+            events: res,
+          },
+        });
+      })
+
+    }, 10000)
+  </script>
+</body>
+</html>
