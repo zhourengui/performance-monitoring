@@ -83,12 +83,16 @@ router.post("/err-events", async (ctx) => {
 });
 
 router.get("/get-err-events", async (ctx) => {
-  const clientIP = getClientIP(ctx.req);
-  const events = fs.readFileSync(
-    `./events/${clientIP === "::1" ? "127.0.0.1" : clientIP}`,
-    "utf-8"
-  );
-  ctx.body = JSON.parse(events || "[[]]");
+  try {
+    const clientIP = getClientIP(ctx.req);
+    const events = fs.readFileSync(
+      `./events/${clientIP === "::1" ? "127.0.0.1" : clientIP}`,
+      "utf-8"
+    );
+    ctx.body = JSON.parse(events || "[[]]");
+  } catch (error) {
+    ctx.body = [[]];
+  }
 });
 
 router.get("/get-err-traceback", async (ctx) => {

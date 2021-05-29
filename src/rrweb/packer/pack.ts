@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { strFromU8, strToU8, zlibSync } from '../fflate';
+import { strFromU8, strToU8, zlibSync } from 'fflate';
 import { PackFn, MARK, eventWithTimeAndPacker } from './base';
 
 export const pack: PackFn = (event) => {

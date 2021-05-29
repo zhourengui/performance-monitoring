@@ -1,4 +1,4 @@
-import { strFromU8, strToU8, unzlibSync } from '../fflate';
+import { strFromU8, strToU8, unzlibSync } from 'fflate';
 import { UnpackFn, eventWithTimeAndPacker, MARK } from './base';
 import { eventWithTime } from '../types';
 
