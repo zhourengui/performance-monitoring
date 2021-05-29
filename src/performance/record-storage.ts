@@ -7,6 +7,8 @@ import type { StorageOpt } from "../types/types"
 */
 
 export const recordingStorage = async (): Promise<StorageOpt> => {
+  if (!WN.storage) return { usageDetails: {} }
+
   const { quota, usage, usageDetails } = await WN.storage.estimate() as StorageOpt
   let res = {
     quota: bytes2kb(quota || 0),

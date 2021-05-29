@@ -149,6 +149,7 @@ new PerformanceMonitoring({
 5. [rrweb.io | Open source web session replay library](https://www.rrweb.io/)
 6. [Web Vitals](https://web.dev/vitals/)
 7. [Add types for window.performance.getEntriesByType · Issue #33866 · microsoft/TypeScript](https://github.com/microsoft/TypeScript/issues/33866)
+8. [StorageEstimate.quota - Web APIs | MDN](https://developer.mozilla.org/en-US/docs/Web/API/StorageEstimate/quota)
 
 ## 记录问题（Pit）
 
@@ -186,3 +187,7 @@ new PerformanceMonitoring({
 5. rrweb 的 record 内置了 window.onerror 的监听，而且并没有保留可以配置的接口
 
 解决方案，拉取源码，定制 rrweb，并且 rrweb 也是使用 typescript 编写，所以修改起来并不难
+
+6. 记录本地的缓存信息需要在 https 的协议下才能获取
+
+[StorageEstimate.quota - Web APIs | MDN](https://developer.mozilla.org/en-US/docs/Web/API/StorageEstimate/quota)

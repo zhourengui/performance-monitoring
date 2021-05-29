@@ -9988,10 +9988,20 @@ var recordingStorage = /*#__PURE__*/function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _context.next = 2;
-            return _constants.WN.storage.estimate();
+            if (_constants.WN.storage) {
+              _context.next = 2;
+              break;
+            }
+
+            return _context.abrupt("return", {
+              usageDetails: {}
+            });
 
           case 2:
+            _context.next = 4;
+            return _constants.WN.storage.estimate();
+
+          case 4:
             _yield$WN$storage$est = _context.sent;
             quota = _yield$WN$storage$est.quota;
             usage = _yield$WN$storage$est.usage;
@@ -10010,7 +10020,7 @@ var recordingStorage = /*#__PURE__*/function () {
 
             return _context.abrupt("return", res);
 
-          case 9:
+          case 11:
           case "end":
             return _context.stop();
         }
@@ -11024,7 +11034,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58880" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61900" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
