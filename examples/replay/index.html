@@ -16,9 +16,9 @@
 </head>
 <body>
   <h1>PerformanceMonitoring 错误录制回放</h1>
-  <span class="button" id="err-trace-btn">测试错误录制回放</span>
+  <h3>目前这里做的是每10s从服务端拿到错误的录制信息</h3>
+  <span class="button" id="err-trace-btn">点击测试错误录制回放</span>
   <div id="player"></div>
-  <script src="https://cdn.jsdelivr.net/npm/rrweb@latest/dist/rrweb.min.js"></script>
   <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/rrweb-player@latest/dist/style.css"
@@ -28,9 +28,15 @@
   <script>
     new miniPm({
       captureError: true,
-      logDomain: "http://localhost:1234",
+      fetchDomain: "http://localhost:1234",
       errEventRoute: "/err-events",
-      errLogRoute: "/err-traceback"
+      errLogRoute: "/err-traceback",
+      logRoute: "/performance-log",
+      isObserverResourceTiming: true,
+      isObserverElementTiming: true,
+      // analyticsTracker: (options) => {
+      //   console.error(options)
+      // }
     })
   </script>
   <script>

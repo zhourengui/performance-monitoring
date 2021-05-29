@@ -1,13 +1,17 @@
+import { recordOptions } from "../rrweb/types";
+
 export interface PerformanceMonitoringOptions {
   isObserverResourceTiming?: boolean,
   isObserverElementTiming?: boolean,
-  lookbackTime?: number,
+  maxTime?: number,
   captureError?: boolean,
   reportData?: ReportDataAchieve | null,
-  logDomain?: string,
+  fetchDomain?: string,
   errLogRoute?: string,
   errEventRoute?: string,
-  logRoute?: string
+  logRoute?: string,
+  analyticsTracker?: (options: AnalyticsTrackerOptions) => void,
+  recordOptions?: recordOptions<any>
 }
 
 export interface StorageOpt {
@@ -62,12 +66,12 @@ export interface NavigatorOpt {
   // User's internet speed
   // 用户的网速
   connection: {
-    downlink: number,
-    effectiveType: string,
-    rtt: number,
-    saveData: boolean,
+    downlink?: number,
+    effectiveType?: EffectiveType,
+    rtt?: number,
+    saveData?: boolean,
     [key: string]: unknown,
-    bandwidth: string
+    bandwidth?: string
   }
 }
 
@@ -84,4 +88,60 @@ export enum AskLevel {
   IDLE = 2,
 }
 
-export type PerformanceObserverEventType = "paint"
+export type PerformanceObserverEventType =
+  | "paint"
+  | "longtask"
+  | "first-input"
+  | "largest-contentful-paint"
+  | "resource"
+  | "layout-shift"
+  | "element"
+
+export type VitalsScore = 'good' | 'needsImprovement' | 'poor' | null;
+
+export interface AnalyticsTrackerOptions {
+  metricName: string;
+  data: TimingOpt | number | NavigatorOpt;
+  eventProperties: object | undefined;
+  navigatorInformation: unknown;
+  vitalsScore: VitalsScore;
+}
+
+export interface NavigatorInformation {
+  deviceMemory?: number;
+  hardwareConcurrency?: number;
+  isLowEndDevice?: boolean;
+  isLowEndExperience?: boolean;
+  serviceWorkerStatus?: 'controlled' | 'supported' | 'unsupported';
+}
+
+export type EffectiveType =
+  | '2g'
+  | '3g'
+  | '4g'
+  | '5g'
+  | 'slow-2g'
+  | 'lte';
+
+export interface PerformanceEntryEncapsulation extends PerformanceEntry {
+  identifier: any;
+  value?: number | undefined;
+  hadRecentInput?: PerformanceEntryEncapsulation | undefined;
+  initiatorType?: string;
+  decodedBodySize?: number;
+  processingStart: DOMHighResTimeStamp;
+  target?: Node;
+  renderTime?: number
+}
+
+export interface ResourceTime {
+  beacon: number;
+  css: number;
+  fetch: number;
+  img: number;
+  other: number;
+  script: number;
+  total: number;
+  xmlhttprequest: number;
+  [key: string]: number
+}

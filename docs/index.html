@@ -58,6 +58,225 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
+				<a href="#performance-monitoring" id="performance-monitoring" style="color: inherit; text-decoration: none;">
+					<h1>performance-monitoring</h1>
+				</a>
+				<p><strong>performance-monitoring 是一个性能监控的 SDK，可以记录 first-paint、first-contentful-paint、first-input-delay、largest-contentful-paint、cumulative-layout-shift、用户的网速等性能指标，可以捕获错误，并且通过配置可以发送错误信息到服务端，可以进行错误的录制，回放错误是怎么产生的，可以对网络请求、长任务进行监听等功能</strong></p>
+				<p><strong>performance-monitoring is a performance monitoring SDK that can record performance indicators such as first-paint, first-contentful-paint, first-input-delay, largest-contentful-paint, cumulative-layout-shift, etc., and can capture errors and configure Error messages can be sent to the server, error recording can be performed, how the playback error is generated, network requests, long tasks can be monitored, etc.</strong></p>
+				<p><img src="./demo.gif" alt="demo.gif"></p>
+				<p><img src="" alt="在线Demo"></p>
+				<a href="#使用指南（guide）" id="使用指南（guide）" style="color: inherit; text-decoration: none;">
+					<h2>使用指南（Guide）</h2>
+				</a>
+				<a href="#安装与使用" id="安装与使用" style="color: inherit; text-decoration: none;">
+					<h3>安装与使用</h3>
+				</a>
+				<a href="#通过ltscriptgt引入" id="通过ltscriptgt引入" style="color: inherit; text-decoration: none;">
+					<h4>通过<code>&lt;script&gt;</code>引入</h4>
+				</a>
+				<pre><code class="language-html"><span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">src</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;https://cdn.jsdelivr.net/npm/mini-pm.umd.js&quot;</span><span style="color: #800000">&gt;&lt;/script&gt;</span>
+<span style="color: #800000">&lt;script&gt;</span>
+<span style="color: #000000FF">  </span><span style="color: #0000FF">new</span><span style="color: #000000FF"> </span><span style="color: #795E26">miniPm</span><span style="color: #000000FF">({ </span><span style="color: #000000">...</span><span style="color: #001080">options</span><span style="color: #000000FF"> });</span>
+<span style="color: #800000">&lt;/script&gt;</span>
+</code></pre>
+				<a href="#通过npm引入" id="通过npm引入" style="color: inherit; text-decoration: none;">
+					<h4>通过<code>npm</code>引入</h4>
+				</a>
+				<pre><code class="language-bash"><span style="color: #000000">$ npm install --save mini-pm</span>
+</code></pre>
+				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">PerformanceMonitoring</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;mini-pm&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">PerformanceMonitoring</span><span style="color: #000000">({ ...</span><span style="color: #001080">options</span><span style="color: #000000"> });</span>
+</code></pre>
+				<a href="#配置介绍" id="配置介绍" style="color: inherit; text-decoration: none;">
+					<h3>配置介绍</h3>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>key</th>
+							<th>默认值</th>
+							<th>功能</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>captureError</td>
+							<td>false</td>
+							<td>是否开启错误捕获</td>
+						</tr>
+						<tr>
+							<td>fetchDomain</td>
+							<td>false</td>
+							<td>发送日志到服务端的域名</td>
+						</tr>
+						<tr>
+							<td>errEventRoute</td>
+							<td>false</td>
+							<td>接收错误录制的路由</td>
+						</tr>
+						<tr>
+							<td>errLogRoute</td>
+							<td>false</td>
+							<td>接收错误日志的路由</td>
+						</tr>
+						<tr>
+							<td>logRoute</td>
+							<td>false</td>
+							<td>接收性能指标的路由</td>
+						</tr>
+						<tr>
+							<td>isObserverResourceTiming</td>
+							<td>false</td>
+							<td>是否监听资源加载的性能</td>
+						</tr>
+						<tr>
+							<td>isObserverElementTiming</td>
+							<td>false</td>
+							<td>是否监听观察元素的性能，需要在 html 标签中添加 elementtiming=&quot;..&quot;属性</td>
+						</tr>
+						<tr>
+							<td>analyticsTracker</td>
+							<td>false</td>
+							<td>对监听的性能指标的回调，包括 资源加载、 观察元素的性能等</td>
+						</tr>
+						<tr>
+							<td>recordOptions</td>
+							<td>false</td>
+							<td>rrweb-record 的配置，详细配置查看 rrweb 的教程文档</td>
+						</tr>
+				</tbody></table>
+				<a href="#常用指标详解" id="常用指标详解" style="color: inherit; text-decoration: none;">
+					<h3>常用指标详解</h3>
+				</a>
+				<ol>
+					<li><p>timeToFirstByte（TTFB）: 浏览器接收到的首个字节的时间</p>
+					</li>
+					<li><p>firstPaintTime（FP）: 浏览器首次绘制的时间</p>
+					</li>
+					<li><p>firstContentfulPaint（FCP）: 浏览器首次有内容绘制</p>
+					</li>
+					<li><p>longTask：超过 50ms 的任务称为长任务</p>
+					</li>
+					<li><p>bandwidth：用户的网速</p>
+					</li>
+				</ol>
+				<a href="#基本的功能" id="基本的功能" style="color: inherit; text-decoration: none;">
+					<h3>基本的功能</h3>
+				</a>
+				<p>记录用户的网速、浏览器信息、各种性能指标</p>
+				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">PerformanceMonitoring</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;mini-pm&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">PerformanceMonitoring</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">fetchDomain:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;http://localhost:1234&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">logRoute:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;/performance-log&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">});</span>
+</code></pre>
+				<p>当页面加载成功后会发送一个请求<code>http://localhost:1234/performance-log</code>到服务端，这个请求不占用主线程，因为用到了浏览器的<code>window.navigator.sendBeacon</code></p>
+				<a href="#错误的捕获与回溯（error-capture-and-backtracking）" id="错误的捕获与回溯（error-capture-and-backtracking）" style="color: inherit; text-decoration: none;">
+					<h3>错误的捕获与回溯（Error capture and backtracking）</h3>
+				</a>
+				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">PerformanceMonitoring</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;mini-pm&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">PerformanceMonitoring</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">captureError:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">, </span><span style="color: #008000">// 错误捕获的开关</span>
+<span style="color: #000000">  </span><span style="color: #001080">fetchDomain:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;http://localhost:1234&quot;</span><span style="color: #000000">, </span><span style="color: #008000">// 发送错误日志的域名</span>
+<span style="color: #000000">  </span><span style="color: #001080">errEventRoute:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;/err-events&quot;</span><span style="color: #000000">, </span><span style="color: #008000">// 错误录制请求的路由，一旦发生错误会发送数据到服务端</span>
+<span style="color: #000000">  </span><span style="color: #001080">errLogRoute:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;/err-traceback&quot;</span><span style="color: #000000">, </span><span style="color: #008000">// 错误日志收集，可以在这个路由做sourcemap的回溯</span>
+<span style="color: #000000">});</span>
+</code></pre>
+				<p>如果使用了录制功能，下面是回放录制的指南</p>
+				<pre><code class="language-html"><span style="color: #800000">&lt;div</span><span style="color: #000000"> </span><span style="color: #FF0000">id</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;player&quot;</span><span style="color: #800000">&gt;&lt;/div&gt;</span>
+
+<span style="color: #800000">&lt;link</span>
+<span style="color: #000000">  </span><span style="color: #FF0000">rel</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;stylesheet&quot;</span>
+<span style="color: #000000">  </span><span style="color: #FF0000">href</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;https://cdn.jsdelivr.net/npm/rrweb-player@latest/dist/style.css&quot;</span>
+<span style="color: #800000">/&gt;</span>
+<span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">src</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;https://cdn.jsdelivr.net/npm/rrweb-player@latest/dist/index.js&quot;</span><span style="color: #800000">&gt;&lt;/script&gt;</span>
+<span style="color: #800000">&lt;script&gt;</span>
+<span style="color: #000000FF">  </span><span style="color: #008000">// 这个录制的数据是上面通过/err-events记录的</span>
+<span style="color: #000000FF">  </span><span style="color: #795E26">fetch</span><span style="color: #000000FF">(</span><span style="color: #A31515">&quot;http://localhost:1234/get-err-events&quot;</span><span style="color: #000000FF">)</span>
+<span style="color: #000000FF">    .</span><span style="color: #795E26">then</span><span style="color: #000000FF">((</span><span style="color: #001080">req</span><span style="color: #000000FF">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000FF"> </span><span style="color: #001080">req</span><span style="color: #000000FF">.</span><span style="color: #795E26">json</span><span style="color: #000000FF">())</span>
+<span style="color: #000000FF">    .</span><span style="color: #795E26">then</span><span style="color: #000000FF">((</span><span style="color: #001080">res</span><span style="color: #000000FF">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000FF"> {</span>
+<span style="color: #000000FF">      </span><span style="color: #001080">document</span><span style="color: #000000FF">.</span><span style="color: #795E26">querySelector</span><span style="color: #000000FF">(</span><span style="color: #A31515">&quot;#player&quot;</span><span style="color: #000000FF">).</span><span style="color: #001080">innerHTML</span><span style="color: #000000FF"> </span><span style="color: #000000">=</span><span style="color: #000000FF"> </span><span style="color: #A31515">&quot;&quot;</span><span style="color: #000000FF">;</span>
+<span style="color: #000000FF">      </span><span style="color: #0000FF">new</span><span style="color: #000000FF"> </span><span style="color: #795E26">rrwebPlayer</span><span style="color: #000000FF">({</span>
+<span style="color: #000000FF">        </span><span style="color: #001080">target:</span><span style="color: #000000FF"> </span><span style="color: #001080">document</span><span style="color: #000000FF">.</span><span style="color: #795E26">querySelector</span><span style="color: #000000FF">(</span><span style="color: #A31515">&quot;#player&quot;</span><span style="color: #000000FF">),</span>
+<span style="color: #000000FF">        </span><span style="color: #008000">// 配置项</span>
+<span style="color: #000000FF">        </span><span style="color: #001080">props:</span><span style="color: #000000FF"> {</span>
+<span style="color: #000000FF">          </span><span style="color: #001080">events:</span><span style="color: #000000FF"> </span><span style="color: #001080">res</span><span style="color: #000000FF">,</span>
+<span style="color: #000000FF">        },</span>
+<span style="color: #000000FF">      });</span>
+<span style="color: #000000FF">    });</span>
+<span style="color: #800000">&lt;/script&gt;</span>
+</code></pre>
+				<p>其他关于 rrweb 的使用教程，请到<a href="https://github.com/rrweb-io/rrweb/blob/master/guide.zh_CN.md">rrweb 官方教程</a>查看对应文档</p>
+				<a href="#监听资源的加载" id="监听资源的加载" style="color: inherit; text-decoration: none;">
+					<h3>监听资源的加载</h3>
+				</a>
+				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">PerformanceMonitoring</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;mini-pm&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">PerformanceMonitoring</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">isObserverResourceTiming:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #795E26">analyticsTracker</span><span style="color: #001080">:</span><span style="color: #000000"> (</span><span style="color: #001080">options</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">options</span><span style="color: #000000">); </span><span style="color: #008000">// 输出resourceTiming的指标</span>
+<span style="color: #000000">  }, </span><span style="color: #008000">// 重写回调</span>
+<span style="color: #000000">});</span>
+</code></pre>
+				<a href="#监听观察元素的性能" id="监听观察元素的性能" style="color: inherit; text-decoration: none;">
+					<h3>监听观察元素的性能</h3>
+				</a>
+				<pre><code class="language-html"><span style="color: #800000">&lt;h2</span><span style="color: #000000"> </span><span style="color: #FF0000">elementtiming</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;text&quot;</span><span style="color: #000000"> </span><span style="color: #FF0000">id</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;text-id&quot;</span><span style="color: #800000">&gt;</span><span style="color: #000000">Element-Timing</span><span style="color: #800000">&lt;/h2&gt;</span>
+<span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">src</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;https://cdn.jsdelivr.net/npm/mini-pm.umd.js&quot;</span><span style="color: #800000">&gt;&lt;/script&gt;</span>
+<span style="color: #800000">&lt;script&gt;</span>
+<span style="color: #000000FF">  </span><span style="color: #0000FF">new</span><span style="color: #000000FF"> </span><span style="color: #795E26">miniPm</span><span style="color: #000000FF">({</span>
+<span style="color: #000000FF">    </span><span style="color: #001080">isObserverElementTiming:</span><span style="color: #000000FF"> </span><span style="color: #0000FF">true</span><span style="color: #000000FF">,</span>
+<span style="color: #000000FF">    </span><span style="color: #795E26">analyticsTracker</span><span style="color: #001080">:</span><span style="color: #000000FF"> (</span><span style="color: #001080">options</span><span style="color: #000000FF">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000FF"> {</span>
+<span style="color: #000000FF">      </span><span style="color: #001080">console</span><span style="color: #000000FF">.</span><span style="color: #795E26">log</span><span style="color: #000000FF">(</span><span style="color: #001080">options</span><span style="color: #000000FF">); </span><span style="color: #008000">// 输出elementtiming的指标</span>
+<span style="color: #000000FF">    }, </span><span style="color: #008000">// 重写回调</span>
+<span style="color: #000000FF">  });</span>
+<span style="color: #800000">&lt;/script&gt;</span>
+</code></pre>
+				<a href="#参考文献（references）" id="参考文献（references）" style="color: inherit; text-decoration: none;">
+					<h2>参考文献（References）</h2>
+				</a>
+				<ol>
+					<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Long_Tasks_API">Long Tasks API - Web API 接口参考 | MDN</a></li>
+					<li><a href="https://web.dev/cls/">Cumulative Layout Shift (CLS)</a></li>
+					<li><a href="https://requestmetrics.com/web-performance/cumulative-layout-shift">Measuring Cumulative Layout Shift | Cumulative Layout Shift (CLS), sometimes known as jank, is a measurement of how much elements move due to late-rendered content. You can think of it as a mea... | Request Metrics</a></li>
+					<li><a href="https://w3c.github.io/navigation-timing/">Navigation Timing Level 2</a></li>
+					<li><a href="https://www.rrweb.io/">rrweb.io | Open source web session replay library</a></li>
+					<li><a href="https://web.dev/vitals/">Web Vitals</a></li>
+					<li><a href="https://github.com/microsoft/TypeScript/issues/33866">Add types for window.performance.getEntriesByType · Issue #33866 · microsoft/TypeScript</a></li>
+				</ol>
+				<a href="#记录问题（pit）" id="记录问题（pit）" style="color: inherit; text-decoration: none;">
+					<h2>记录问题（Pit）</h2>
+				</a>
+				<ol>
+					<li>为什么要使用这个 SDK？</li>
+				</ol>
+				<p>首先，如果你的网站不在乎用户的体验，那么可以放弃使用这样类似的性能监控的 SDK。</p>
+				<p>如果你的网站非常在乎用户的体验，包括白屏时间的计算、用户操作的延迟时间、用户是怎么操作出现的错误等都可以使用这个 SDK，一个网站不能通过直觉去感知一个网站的性能。</p>
+				<p>而且很多前端小伙伴都知道的一个知识点 SPA 白屏时间？，没有一个指标通过理论你凭什么说 SPA 的白屏时间长，这个是需要通过测量的数值去衡量的。</p>
+				<ol start="2">
+					<li>如何屏幕的录制</li>
+				</ol>
+				<p>有多种解决方案：</p>
+				<ul>
+					<li>使用 WebRTC，进行实时通信</li>
+					<li>使用 html2canvas 生成一张一张的图片，然后合成为一个视频</li>
+					<li>使用 xpath，然后通过无头浏览器还原 xpath 还原成 png 合成，然后代理掉全部的操作。</li>
+					<li>将 html 全部转化为 vdom，使用 MutationObserver 监听 dom 的变化，记录 dom 的变化，把修改的 dom 还原成真实的 dom，然后鼠标的根据收集到的位置进行 canvas 渲染出来</li>
+				</ul>
+				<p>目前这个项目使用的方案是第四个，一开始的想法也是通过这种方式去实现，在实现的过程中也发现 rrweb 的实现原理也是这样子的，所以就不重复造轮子。</p>
+				<ol start="3">
+					<li>如何不影响业务的情况下去发送请求</li>
+				</ol>
+				<p>解决方案：</p>
+				<p>使用<code>window.navigator.sendBeacon</code>，这个 API 会在浏览器空闲的时候才去发送请求，但是有个缺点就是，没有响应</p>
+				<p>使用<code>window.requestIdleCallback</code>，这个 API 将在浏览器的空闲时段内调用的函数排队。这使开发者能够在主事件循环上执行后台和低优先级工作，而不会影响延迟关键事件，如动画和输入响应。函数一般会按先进先调用的顺序执行，然而，如果回调函数指定了执行超时时间 timeout，则有可能为了在超时前执行函数而打乱执行顺序。</p>
+				<ol start="4">
+					<li>记录用户浏览器信息、用户网速、本地缓存信息的作用何在？</li>
+				</ol>
+				<p>记录这些信息是非常有必要的，举一个简单的例子，我们的页面做了性能优化，把业务代码都离线缓存在了本地，然后突然有一个用户反应会很卡顿，有一些低端设备当本地缓存达到多少的时候就会出现这种情况，这时候我们不可能去让用户去给我们提供用户浏览器的信息、本地缓存的信息，当我们有这些信息之后，就可以再次进行优化。</p>
+				<ol start="5">
+					<li>rrweb 的 record 内置了 window.onerror 的监听，而且并没有保留可以配置的接口</li>
+				</ol>
+				<p>解决方案，拉取源码，定制 rrweb，并且 rrweb 也是使用 typescript 编写，所以修改起来并不难</p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -79,6 +298,21 @@
 						<a href="modules/index.html">index</a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="modules/performance_first_input.html">performance/first-<wbr>input</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/performance_layout_shift.html">performance/layout-<wbr>shift</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/performance_longtask.html">performance/longtask</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/performance_paint.html">performance/paint</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/performance_performance_observer.html">performance/performance-<wbr>observer</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="modules/performance_record_client_navigator.html">performance/record-<wbr>client-<wbr>navigator</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -88,13 +322,103 @@
 						<a href="modules/performance_record_timing.html">performance/record-<wbr>timing</a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="modules/performance_resource.html">performance/resource</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/rrweb.html">rrweb</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/rrweb_fflate.html">rrweb/fflate</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/rrweb_fflate_node_worker.html">rrweb/fflate/node-<wbr>worker</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/rrweb_fflate_worker.html">rrweb/fflate/worker</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/rrweb_packer.html">rrweb/packer</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/rrweb_packer_base.html">rrweb/packer/base</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/rrweb_packer_pack.html">rrweb/packer/pack</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/rrweb_packer_unpack.html">rrweb/packer/unpack</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/rrweb_record.html">rrweb/record</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/rrweb_record_error_stack_parser.html">rrweb/record/error-<wbr>stack-<wbr>parser</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/rrweb_record_iframe_manager.html">rrweb/record/iframe-<wbr>manager</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/rrweb_record_mutation.html">rrweb/record/mutation</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/rrweb_record_observer.html">rrweb/record/observer</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/rrweb_record_shadow_dom_manager.html">rrweb/record/shadow-<wbr>dom-<wbr>manager</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/rrweb_record_stringify.html">rrweb/record/stringify</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/rrweb_snapshot.html">rrweb/snapshot</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/rrweb_snapshot_css.html">rrweb/snapshot/css</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/rrweb_snapshot_rebuild.html">rrweb/snapshot/rebuild</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/rrweb_snapshot_snapshot.html">rrweb/snapshot/snapshot</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/rrweb_snapshot_types.html">rrweb/snapshot/types</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/rrweb_snapshot_utils.html">rrweb/snapshot/utils</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/rrweb_types.html">rrweb/types</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/rrweb_utils.html">rrweb/utils</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="modules/types_types.html">types/types</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="modules/utils_reportdata.html">utils/<wbr>Report<wbr>Data</a>
 					</li>
 					<li class=" tsd-kind-module">
+						<a href="modules/utils_console.html">utils/console</a>
+					</li>
+					<li class=" tsd-kind-module">
 						<a href="modules/utils_helper.html">utils/helper</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/utils_log.html">utils/log</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/utils_metrics.html">utils/metrics</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/utils_navigator_information.html">utils/navigator-<wbr>information</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/utils_report_performance.html">utils/report-<wbr>performance</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/utils_vitals_score.html">utils/vitals-<wbr>score</a>
 					</li>
 				</ul>
 			</nav>
@@ -110,8 +434,12 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
+				<li class="tsd-kind-namespace"><span class="tsd-kind-icon">Namespace</span></li>
 				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
 				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>

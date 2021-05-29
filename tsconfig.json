@@ -6,7 +6,7 @@
     "module": "ESNext",
     "target": "ESNext",
     "noImplicitAny": true,
-    "noImplicitThis": true,
+    "noImplicitThis": false,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,

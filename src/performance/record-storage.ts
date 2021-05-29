@@ -1,4 +1,4 @@
-import { bytes2mb } from "../utils/helper"
+import { bytes2kb } from "../utils/helper"
 import { WN } from "../constants"
 import type { StorageOpt } from "../types/types"
 
@@ -9,12 +9,12 @@ import type { StorageOpt } from "../types/types"
 export const recordingStorage = async (): Promise<StorageOpt> => {
   const { quota, usage, usageDetails } = await WN.storage.estimate() as StorageOpt
   let res = {
-    quota: bytes2mb(quota || 0),
-    usage: bytes2mb(usage || 0),
+    quota: bytes2kb(quota || 0),
+    usage: bytes2kb(usage || 0),
     usageDetails,
   }
   if (res.usageDetails) {
-    Object.keys(res.usageDetails || {}).forEach(key => res.usageDetails[key] = bytes2mb(res.usageDetails[key]))
+    Object.keys(res.usageDetails || {}).forEach(key => res.usageDetails[key] = bytes2kb(res.usageDetails[key]))
   }
   return res
 }

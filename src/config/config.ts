@@ -1,9 +1,14 @@
-import type { PerformanceMonitoringOptions } from "../types/types";
+import type { AnalyticsTrackerOptions, PerformanceMonitoringOptions } from "../types/types";
+import { log } from "../utils/console";
 
 export const config: PerformanceMonitoringOptions = {
   isObserverResourceTiming: false,
   isObserverElementTiming: false,
-  lookbackTime: 15000,
+  maxTime: 15000,
   captureError: true,
-  reportData: null
+  reportData: null,
+  analyticsTracker: (options: AnalyticsTrackerOptions) => {
+    log(options)
+  },
+  recordOptions: {}
 }

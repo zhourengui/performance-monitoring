@@ -1,16 +1,16 @@
 import { AskLevel, ReportDataAchieve } from "../types/types"
 import { W, WN } from "../constants"
+import { config } from "../config/config"
 
 export interface ReportDataOptions {
   logDomain: string | undefined,
 }
 
+/**
+ * Log collection
+ * 日志收集
+ */
 export default class ReportData implements ReportDataAchieve {
-  private logDomain: string | undefined
-  constructor(options: ReportDataOptions) {
-    const { logDomain } = options
-    this.logDomain = logDomain
-  }
   /**
    * Log report, error report
    * If the level is urgent, use http request directly, otherwise use navigator.sendBeacon
@@ -21,7 +21,7 @@ export default class ReportData implements ReportDataAchieve {
    * @param uri 
    */
   public fetch(level: AskLevel, body: string, uri: string): void {
-    uri = this.logDomain + uri
+    uri = config.fetchDomain + uri
 
     switch (level) {
       case AskLevel.URGENT: {

@@ -1,8 +1,10 @@
 import { AskLevel } from "../types/types"
 import { config } from "../config/config"
-import { C, W } from "../constants"
-import { record, pack } from "rrweb"
-import { eventWithTime } from "rrweb/typings/types"
+import { W } from "../constants"
+import record from "../rrweb/record"
+import { pack } from "../rrweb/packer"
+import { eventWithTime } from "../rrweb/types"
+import { warn } from "../utils/console"
 /**
  * Error Trap
  */
@@ -12,7 +14,12 @@ export default class ErrorTrace {
   private eventsMatrix: Array<Array<eventWithTime>> = [[]]
 
   private constructor() {
+    this.globalErrorTrace()
+    this.networkErrorTrace()
+    this.promiseErrorTrace()
+    this.iframeErrorTrace()
     record({
+      ...config.recordOptions,
       emit: (event, isCheckout) => {
         if (isCheckout) {
           this.eventsMatrix.push([]);
@@ -20,17 +27,10 @@ export default class ErrorTrace {
         const lastEvents = this.eventsMatrix[this.eventsMatrix.length - 1];
         lastEvents.push(event);
       },
-      recordLog: true,
+      recordLog: false,
       checkoutEveryNth: 10,
       packFn: pack,
     })
-
-    setTimeout(() => {
-      this.globalErrorTrace()
-      this.networkErrorTrace()
-      this.promiseErrorTrace()
-      this.iframeErrorTrace()
-    }, 100)
   }
 
   public static getInstance(): ErrorTrace {
@@ -54,15 +54,17 @@ export default class ErrorTrace {
       colno?: number,
       error?: Error
     ) => {
-      C.log("❌全局捕获错误", {
+
+      warn({
         source,
         lineno,
         colno,
         error,
       })
 
-      if (config.errEventRoute) {
-        const len = this.eventsMatrix.length;
+      const len = this.eventsMatrix.length;
+
+      if (config.errEventRoute && len >= 2) {
         const events = this.eventsMatrix[len - 2].concat(this.eventsMatrix[len - 1]);
         config.reportData?.fetch(
           AskLevel.IDLE,
@@ -99,7 +101,7 @@ export default class ErrorTrace {
       "error",
       (e: ErrorEvent) => {
         if (e.target !== W) {
-          C.log("❌捕获网络错误", e.target)
+          warn(e.target)
         }
       },
       true
@@ -112,7 +114,7 @@ export default class ErrorTrace {
   private promiseErrorTrace(): void {
     window.addEventListener("unhandledrejection", (e) => {
       e.preventDefault()
-      C.log("❌捕获promise错误", e.reason)
+      warn(e.reason)
       return true
     })
   }
@@ -122,15 +124,15 @@ export default class ErrorTrace {
     for (let i = 0; i < frames.length; i++) {
       frames[i].addEventListener(
         "error",
-        (e) => {
-          C.log("❌捕获iframe错误", e)
+        (e: ErrorEvent) => {
+          warn(e)
         },
         true
       )
       frames[i].addEventListener(
         "unhandledrejection",
         (e) => {
-          C.log("❌捕获iframe unhandledrejection错误", e)
+          warn(e)
         },
         true
       )

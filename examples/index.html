@@ -12,14 +12,52 @@
       border-radius: 10px;
       padding: 10px 20px;
     }
+    .animation-box {
+      width: 200px;
+      height: 200px;
+      background-color: blanchedalmond;
+      margin-top: 20px;
+      animation: move 2s infinite;
+    }
+
+    @keyframes move {
+      0% {
+        transform: translate(0, 0);
+      }
+      25% {
+        transform: translate(200px, 0);
+      }
+      50% {
+        transform: translate(200px, 200px);
+      }
+      75% {
+        transform: translate(0, 200px);
+      }
+      100% {
+        transform: translate(0, 0);
+      }
+    }
   </style>
+  <link href="https://cdn.bootcdn.net/ajax/libs/animate.css/4.1.1/animate.compat.css" rel="stylesheet">
 </head>
 <body>
   <h1>PerformanceMonitoring</h1>
   <span class="button" id="network-error-btn">测试捕获网络错误</span>
   <span class="button" id="global-error-btn">测试全局捕获全局信息</span>
   <span class="button" id="promise-error-btn">测试未处理的Promise错误</span>
-  <script src="../src/index.ts"></script>
+  <span class="button" id="get-err-player">获取错误录制回放</span>
+  <div class="animation-box"></div>
+  <h2 elementtiming="text" id="text-id">Element-Timing</h2>
+  <div class="layout-shift">
+    <span class="button" id="layout-shift-button">测试layout-shift</span>
+  </div>
+  <div id="player"></div>
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/rrweb-player@latest/dist/style.css"
+  />
+  <script src="https://cdn.jsdelivr.net/npm/rrweb-player@latest/dist/index.js"></script>
+  <script src="./index.ts"></script>
   <script>
     document.querySelector("#network-error-btn").onclick = function() {
       const image = document.createElement("img")
@@ -32,6 +70,25 @@
     document.querySelector("#promise-error-btn").onclick = function() {
       Promise.reject(new Error("Rejected"))
     }
+    document.querySelector("#layout-shift-button").onclick = function () {
+      const layoutShiftDom = document.querySelector(".layout-shift")
+      layoutShiftDom.append("<span>新增元素</span>")
+      layoutShiftDom.style.marginTop = CSS.px(100)
+    }
+    document.querySelector("#get-err-player").onclick = function () {
+      fetch("http://performance-monitoring.zhourengui.top/performance-monitoring/get-err-events").then(req => req.json()).then(res => {
+        document.querySelector("#player").innerHTML = ""
+        new rrwebPlayer({
+          target: document.querySelector("#player"), // 可以自定义 DOM 元素
+          // 配置项
+          props: {
+            events: res,
+          },
+        });
+      })
+    }
   </script>
+  <script src="./longtask.js"></script>
+
 </body>
 </html>

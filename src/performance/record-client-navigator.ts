@@ -1,5 +1,9 @@
 import { WN } from "../constants"
-import type { NavigatorOpt } from "../types/types"
+import type { EffectiveType, NavigatorOpt } from "../types/types"
+import { pushTask } from "../utils/helper"
+
+export let effectiveType: EffectiveType = "4g"
+export let saveData: boolean = false
 
 /**
    * Get user's browser information, internet speed and other information
@@ -11,31 +15,40 @@ import type { NavigatorOpt } from "../types/types"
    * @return {NavigatorOpt}
    */
 export const recordClientNavigator = async (): Promise<NavigatorOpt> => {
-  let res = {} as NavigatorOpt
-  if ("connection" in WN) {
-    res.connection = (WN as any).connection
-  }
-  // Doppler Velocity
-  if ("fetch" in window) {
-    let times = []
-    const sizes = [0, 0, 0, 50, 100]
-    const fetchs = sizes.map(i => (() => new Promise(async resolve => {
-      await fetch(`http://106.12.49.47:1234/doppler-velocity?size=${i}`)
-      resolve(true)
-    })))
+  return new Promise(resolve => {
+    let res = {} as NavigatorOpt
+    if ("connection" in WN) {
+      res.connection = {
+        downlink: WN.connection.downlink,
+        effectiveType: WN.connection.effectiveType,
+        rtt: WN.connection.rtt,
+        saveData: WN.connection.saveData,
+      }
+      saveData = res.connection.saveData || saveData
+      effectiveType = res.connection.effectiveType || effectiveType
+    }
+    // Doppler Velocity
+    if ("fetch" in window) {
+      pushTask(async () => {
+        let times = []
+        const sizes = [0, 0, 0, 50, 100]
+        const fetchs = sizes.map(i => (() => new Promise(async resolve => {
+          await fetch(`http://performance-monitoring.zhourengui.top/performance-monitoring/doppler-velocity?size=${i}`)
+          resolve(true)
+        })))
 
-    times.push(+ new Date())
+        times.push(+ new Date())
 
-    while (fetchs.length) {
-      const f = fetchs.shift()
-      await f?.()
-      times.push(+ new Date())
+        while (fetchs.length) {
+          const f = fetchs.shift()
+          await f?.()
+          times.push(+ new Date())
+        }
+        res.connection.bandwidth = `${((sizes[4] - sizes[3]) / ((times[5] - times[4]) / 1000)).toFixed(2)} k/s`
+        resolve(res)
+      })
     }
 
-    res.connection.bandwidth = `${((sizes[4] - sizes[3]) / ((times[5] - times[4]) / 1000)).toFixed(2)} k/s`
-  }
-
-  res.userAgent = WN.userAgent
-
-  return res
+    res.userAgent = WN.userAgent
+  })
 }

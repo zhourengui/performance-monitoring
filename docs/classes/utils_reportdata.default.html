@@ -68,6 +68,14 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Log collection
+						日志收集</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -92,12 +100,6 @@
 								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="utils_reportdata.default.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
-							<h3>Properties</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="utils_reportdata.default.html#logdomain" class="tsd-kind-icon">log<wbr>Domain</a></li>
-							</ul>
-						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
@@ -113,37 +115,15 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new default<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/utils_reportdata.reportdataoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">ReportDataOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="utils_reportdata.default.html" class="tsd-signature-type" data-tsd-kind="Class">default</a></li>
+						<li class="tsd-signature tsd-kind-icon">new default<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="utils_reportdata.default.html" class="tsd-signature-type" data-tsd-kind="Class">default</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in utils/ReportData.ts:9</li>
-								</ul>
 							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>options: <a href="../interfaces/utils_reportdata.reportdataoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">ReportDataOptions</a></h5>
-								</li>
-							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="utils_reportdata.default.html" class="tsd-signature-type" data-tsd-kind="Class">default</a></h4>
 						</li>
 					</ul>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="logdomain" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> log<wbr>Domain</h3>
-					<div class="tsd-signature tsd-kind-icon">log<wbr>Domain<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in utils/ReportData.ts:9</li>
-						</ul>
-					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -159,12 +139,14 @@
 							<aside class="tsd-sources">
 								<p>Implementation of ReportDataAchieve.fetch</p>
 								<ul>
-									<li>Defined in utils/ReportData.ts:21</li>
+									<li>Defined in <a href="https://github.com/zhourengui/performance-monitoring/blob/94ca7c7/src/utils/ReportData.ts#L23">src/utils/ReportData.ts:23</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>日志上报、错误上报
+									<p>Log report, error report
+										If the level is urgent, use http request directly, otherwise use navigator.sendBeacon
+										日志上报、错误上报
 									如果level很紧急，直接使用http请求，否者使用navigator.sendBeacon</p>
 								</div>
 							</div>
@@ -194,35 +176,8 @@
 					<li class=" ">
 						<a href="../modules.html">Exports</a>
 					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/config_config.html">config/config</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/constants.html">constants</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/error_trace.html">error-<wbr>trace</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/index.html">index</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/performance_record_client_navigator.html">performance/record-<wbr>client-<wbr>navigator</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/performance_record_storage.html">performance/record-<wbr>storage</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/performance_record_timing.html">performance/record-<wbr>timing</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/types_types.html">types/types</a>
-					</li>
 					<li class="current tsd-kind-module">
 						<a href="../modules/utils_reportdata.html">utils/<wbr>Report<wbr>Data</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/utils_helper.html">utils/helper</a>
 					</li>
 				</ul>
 			</nav>
@@ -235,9 +190,6 @@
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
 								<a href="utils_reportdata.default.html#constructor" class="tsd-kind-icon">constructor</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="utils_reportdata.default.html#logdomain" class="tsd-kind-icon">log<wbr>Domain</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="utils_reportdata.default.html#fetch" class="tsd-kind-icon">fetch</a>
@@ -259,22 +211,23 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
+				<li class="tsd-kind-namespace"><span class="tsd-kind-icon">Namespace</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
 				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
 				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
-				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
 			</ul>
 		</div>
 	</div>
