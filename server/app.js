@@ -106,6 +106,7 @@ router.post("/performance-log", async (ctx) => {
   const statInfo = await getStat(file);
   let performances = [];
   if (statInfo) {
+    console.error(statInfo);
     performances = JSON.parse(fs.readFileSync(file, "utf-8") || "[]");
   }
   const log = JSON.parse(ctx.request.body);
@@ -115,12 +116,16 @@ router.post("/performance-log", async (ctx) => {
 });
 
 router.get("/get-performance-log", async (ctx) => {
-  const clientIP = getClientIP(ctx.req);
-  const performances = fs.readFileSync(
-    `./performances/${clientIP === "::1" ? "127.0.0.1" : clientIP}`,
-    "utf-8"
-  );
-  ctx.body = JSON.parse(performances || "[]");
+  try {
+    const clientIP = getClientIP(ctx.req);
+    const performances = fs.readFileSync(
+      `./performances/${clientIP === "::1" ? "127.0.0.1" : clientIP}`,
+      "utf-8"
+    );
+    ctx.body = JSON.parse(performances || "[]");
+  } catch (error) {
+    ctx.body = [];
+  }
 });
 
 app

@@ -1,6 +1,6 @@
 {
   "name": "mini-pm",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "一款mini性能优化监控平台",
   "source": "src/index.ts",
   "main": "dist/mini-pm.js",
@@ -9,6 +9,9 @@
   "types": "dist/typings/index.d.ts",
   "unpkg": "dist/mini-pm.umd.js",
   "type": "module",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "microbundle && npm run api:run && npm run api:doc",
     "dev": "microbundle watch",
