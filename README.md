@@ -15,7 +15,7 @@
 #### 通过`<script>`引入
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/mini-pm@1.0.5/dist/mini-pm.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mini-pm@latest/dist/mini-pm.umd.js"></script>
 <script>
   new miniPm({ ...options });
 </script>
@@ -129,7 +129,7 @@ new PerformanceMonitoring({
 
 ```html
 <h2 elementtiming="text" id="text-id">Element-Timing</h2>
-<script src="https://cdn.jsdelivr.net/npm/mini-pm@1.0.5/dist/mini-pm.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mini-pm@latest/dist/mini-pm.umd.js"></script>
 <script>
   new miniPm({
     isObserverElementTiming: true,

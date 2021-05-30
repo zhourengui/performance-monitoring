@@ -1,6 +1,6 @@
 {
   "name": "mini-pm",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "一款mini性能优化监控平台",
   "source": "src/index.ts",
   "main": "dist/mini-pm.js",

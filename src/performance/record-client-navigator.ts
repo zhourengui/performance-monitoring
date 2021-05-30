@@ -32,18 +32,14 @@ export const recordClientNavigator = async (): Promise<NavigatorOpt> => {
       pushTask(async () => {
         let times = []
         const sizes = [0, 0, 0, 50, 100]
-        const fetchs = sizes.map(i => (() => new Promise(async resolve => {
-          await fetch(`http://performance-monitoring.zhourengui.top/performance-monitoring/doppler-velocity?size=${i}`)
-          resolve(true)
-        })))
 
         times.push(+ new Date())
 
-        while (fetchs.length) {
-          const f = fetchs.shift()
-          await f?.()
+        for (let size of sizes) {
+          await fetch(`http://performance-monitoring.zhourengui.top/performance-monitoring/doppler-velocity?size=${size}`)
           times.push(+ new Date())
         }
+
         res.connection.bandwidth = `${((sizes[4] - sizes[3]) / ((times[5] - times[4]) / 1000)).toFixed(2)} k/s`
         resolve(res)
       })
