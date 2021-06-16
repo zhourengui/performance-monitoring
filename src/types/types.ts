@@ -1,17 +1,17 @@
 import { recordOptions } from "../rrweb/types";
 
 export interface PerformanceMonitoringOptions {
-  isObserverResourceTiming?: boolean,
-  isObserverElementTiming?: boolean,
-  maxTime?: number,
-  captureError?: boolean,
-  reportData?: ReportDataAchieve | null,
-  fetchDomain?: string,
-  errLogRoute?: string,
-  errEventRoute?: string,
-  logRoute?: string,
-  analyticsTracker?: (options: AnalyticsTrackerOptions) => void,
-  recordOptions?: recordOptions<any>
+  isObserverResourceTiming: boolean,
+  isObserverElementTiming: boolean,
+  maxTime: number,
+  captureError: boolean,
+  reportData: ReportDataAchieve | null,
+  fetchDomain: string,
+  errLogRoute: string,
+  errEventRoute: string,
+  logRoute: string,
+  analyticsTracker: (options: AnalyticsTrackerOptions) => void,
+  recordOptions: recordOptions<any>
 }
 
 export interface StorageOpt {

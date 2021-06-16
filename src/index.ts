@@ -19,7 +19,7 @@ import { log } from "./utils/console"
  * @packageDocumentation
  */
 export default class PerformanceMonitoring {
-  constructor(options: PerformanceMonitoringOptions = {}) {
+  constructor(options: PerformanceMonitoringOptions) {
     const {
       isObserverElementTiming,
       isObserverResourceTiming,
@@ -31,7 +31,7 @@ export default class PerformanceMonitoring {
       logRoute,
       analyticsTracker,
       recordOptions,
-    } = options
+    } = options || {}
 
     config.isObserverElementTiming = !!isObserverElementTiming
     config.isObserverResourceTiming = !!isObserverResourceTiming

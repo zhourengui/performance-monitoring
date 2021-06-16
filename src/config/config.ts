@@ -10,5 +10,9 @@ export const config: PerformanceMonitoringOptions = {
   analyticsTracker: (options: AnalyticsTrackerOptions) => {
     log(options)
   },
-  recordOptions: {}
+  recordOptions: {},
+  fetchDomain: "",
+  errLogRoute: "",
+  errEventRoute: "",
+  logRoute: ""
 }
