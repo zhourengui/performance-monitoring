@@ -1,6 +1,6 @@
 import { PerformanceEntryEncapsulation } from "../types/types"
 import { logData, logMetric } from "../utils/log"
-import { bt, cls, lcp, rt } from "../utils/metrics"
+import { tbt, cls, lcp, rt } from "../utils/metrics"
 import { disconnectPO, performanceObserverInstance } from "./performance-observer"
 
 /**
@@ -53,17 +53,17 @@ export const initFirstInput = (entries: Array<PerformanceEntryEncapsulation>) =>
   logMetric("cls", cls.value)
 
   // bt log
-  logMetric("bt", bt.value)
+  logMetric("bt", tbt.value)
 
   // TBT with 5 second delay after FID
   setTimeout(() => {
-    logMetric("bt5S", bt.value)
+    logMetric("bt5S", tbt.value)
   }, 5000)
 
   // TBT with 10 second delay after FID
   // 10S overall data consumption after FID is activated
   setTimeout(() => {
-    logMetric("bt10S", bt.value)
+    logMetric("bt10S", tbt.value)
     logData("dataConsumption", rt.value)
   }, 10000)
 }

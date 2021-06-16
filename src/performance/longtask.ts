@@ -1,6 +1,6 @@
 import { PerformanceEntryEncapsulation } from "../types/types"
 import { logMetric } from "../utils/log"
-import { bt, fcp } from "../utils/metrics"
+import { tbt, fcp } from "../utils/metrics"
 
 /**
  * LongtaskObserverCallback
@@ -16,7 +16,7 @@ export const initLongtask = (entries: Array<PerformanceEntryEncapsulation>) => {
     const blockingTime = entry.startTime - 50
     if (entry.name !== "self" && entry.startTime < fcp.value) return
     if (blockingTime > 0) {
-      bt.value += entry.startTime
+      tbt.value += entry.startTime
       logMetric("longtask", entry.startTime)
     }
   }

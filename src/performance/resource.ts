@@ -1,6 +1,6 @@
 import { PerformanceEntryEncapsulation } from "../types/types"
-import { logData, logMetric } from "../utils/log"
-import { bt, fcp, rt } from "../utils/metrics"
+import { logData } from "../utils/log"
+import { rt } from "../utils/metrics"
 
 /**
  * ResouceTimingObserverCallback

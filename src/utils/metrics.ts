@@ -11,7 +11,7 @@ export const fcp = {
 }
 
 // block-time
-export const bt = {
+export const tbt = {
   value: 0
 }
 

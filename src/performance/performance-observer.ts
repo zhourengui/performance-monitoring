@@ -8,7 +8,7 @@ import { config } from "../config/config"
 import { initResouceTiming } from "./resource"
 import { initLayoutShift } from "./layout-shift"
 import { logMetric } from "../utils/log"
-import { bt, cls, lcp } from "../utils/metrics"
+import { tbt, cls, lcp } from "../utils/metrics"
 
 export const performanceObserverInstance: PerformanceObservers = {}
 
@@ -32,7 +32,7 @@ const asyncSubscripePO = (
     Observer.observe({ type: eventType, buffered: true })
     return Observer
   } catch (error) {
-    C.warn("PerformanceMonitoring obsever🌲:",`${name}: ${error}`);
+    C.warn("PerformanceMonitoring obsever🌲:", `${name}: ${error}`);
   }
   return null
 }
@@ -108,7 +108,7 @@ export const disconnectPerformanceObserver = (): void => {
   }
 
   if (performanceObserverInstance["longtask"]) {
-    logMetric("btFinal", bt.value)
+    logMetric("btFinal", tbt.value)
     disconnectPO("longtask")
   }
 }

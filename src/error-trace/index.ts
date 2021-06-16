@@ -5,6 +5,7 @@ import record from "../rrweb/record"
 import { pack } from "../rrweb/packer"
 import { eventWithTime } from "../rrweb/types"
 import { warn } from "../utils/console"
+
 /**
  * Error Trap
  */
