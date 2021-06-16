@@ -1,6 +1,6 @@
 {
   "name": "mini-pm",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "一款mini性能优化监控平台",
   "source": "src/index.ts",
   "main": "dist/mini-pm.js",
@@ -18,7 +18,8 @@
     "example": "parcel serve ./examples/index.html -p 12345",
     "api:init": "api-extractor init",
     "api:run": "api-extractor run --local --verbose",
-    "api:doc": "typedoc --out docs src"
+    "api:doc": "typedoc --out docs src",
+    "sonar": "./sonar.sh"
   },
   "devDependencies": {
     "@babel/core": "^7.14.0",

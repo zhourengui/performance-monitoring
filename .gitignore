@@ -158,3 +158,5 @@ tmp/
 temp/
 
 yarn.lock
+
+.scannerwork
