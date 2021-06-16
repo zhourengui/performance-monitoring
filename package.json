@@ -1,6 +1,6 @@
 {
   "name": "mini-pm",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "一款mini性能优化监控平台",
   "source": "src/index.ts",
   "main": "dist/mini-pm.js",
@@ -29,7 +29,8 @@
     "microbundle": "^0.13.0",
     "parcel-bundler": "^1.12.5",
     "scripty": "^2.0.0",
-    "typedoc": "^0.20.36"
+    "typedoc": "^0.20.36",
+    "typescript": "4.2"
   },
   "dependencies": {
     "fflate": "^0.7.0",

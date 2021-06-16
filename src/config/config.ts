@@ -6,7 +6,7 @@ export const config: PerformanceMonitoringOptions = {
   isObserverElementTiming: false,
   maxTime: 15000,
   captureError: true,
-  reportData: null,
+  reportData: undefined,
   analyticsTracker: (options: AnalyticsTrackerOptions) => {
     log(options)
   },
