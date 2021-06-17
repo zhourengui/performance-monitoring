@@ -3,14 +3,14 @@ type: docker
 name: default
 
 steps:
-  - name: npm install
+  - name: yarn install
     image: node:alpine
     commands:
-      - npm i --registry=https://registry.npm.taobao.org
-  - name: npm build
+      - yarn
+  - name: yarn build
     image: node:alpine
     commands:
-      - npm run build
+      - yarn build
   - name: notify
     image: curlimages/curl
     commands:
