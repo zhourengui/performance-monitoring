@@ -15,7 +15,7 @@ steps:
     image: curlimages/curl
     commands:
       - |
-        curl 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=dbb3fa53-29f8-4394-bfa1-ecce009e8cbb' -H 'Content-Type: application/json' -d '{"msgtype": "text", "text": {"content": "ok"}}'
+        curl 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=e6ad01ff-7207-4183-abfa-4c89fa802177' -H 'Content-Type: application/json' -d '{"msgtype": "text", "text": {"content": "ok"}}'
     when:
       status:
         - failure
