@@ -1,0 +1,22 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+  - name: npm install
+    image: node:alpine
+    commands:
+      - npm i --registry=https://registry.npm.taobao.org
+  - name: npm build
+    image: node:alpine
+    commands:
+      - npm run build
+  - name: notify
+    image: curlimages/curl
+    commands:
+      - |
+        curl 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=dbb3fa53-29f8-4394-bfa1-ecce009e8cbb' -H 'Content-Type: application/json' -d '{"msgtype": "text", "text": {"content": "ok"}}'
+    when:
+      status:
+        - failure
+        - success
