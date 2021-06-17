@@ -19,7 +19,7 @@
     "api:init": "api-extractor init",
     "api:run": "api-extractor run --local --verbose",
     "api:doc": "typedoc --out docs src",
-    "sonar": "./sonar.sh"
+    "test": "./sonar.sh"
   },
   "devDependencies": {
     "@babel/core": "^7.14.0",
