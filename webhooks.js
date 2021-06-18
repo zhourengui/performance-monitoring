@@ -22,9 +22,10 @@ handler.on("push", function (event) {
     event.payload.repository.name,
     event.payload.ref
   );
-
-  shell.exec("pm2 delete app");
   shell.exec("git pull");
+  shell.exec("rm -rf ./node_modules");
+  shell.exec("yarn");
+  shell.exec("pm2 delete app");
   shell.exec("pm2 start ./server/app.js");
 });
 
