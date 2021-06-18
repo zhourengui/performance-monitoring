@@ -8,6 +8,7 @@ steps:
     commands:
       - yarn
   - name: yarn test
+    image: node:alpine
     commands:
       - yarn test
   - name: yarn build
@@ -15,6 +16,7 @@ steps:
     commands:
       - yarn build
   - name: publish to npm
+    image: node:alpine
     commands:
       - yarn publish
   - name: notify
