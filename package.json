@@ -19,7 +19,8 @@
     "api:run": "api-extractor run --local --verbose",
     "api:doc": "typedoc --out docs src",
     "publish": "node ./scripts/publish.js",
-    "test": "node ./scripts/sonar.js"
+    "test": "node ./scripts/sonar.js",
+    "precommit": "node ./scripts/precommit.js"
   },
   "devDependencies": {
     "@babel/core": "^7.14.0",
@@ -27,6 +28,7 @@
     "@microsoft/api-extractor": "^7.15.2",
     "@types/css-font-loading-module": "^0.0.4",
     "chalk": "^4.1.1",
+    "husky": "^6.0.0",
     "microbundle": "^0.13.0",
     "mvdir": "^1.0.21",
     "ora": "^5.4.1",
@@ -43,5 +45,10 @@
     "performance": "^1.4.0",
     "src": "^1.1.2",
     "types": "^0.1.1"
+  },
+  "husky": {
+    "husky": {
+      "pre-commit": "npm run precommit"
+    }
   }
 }
