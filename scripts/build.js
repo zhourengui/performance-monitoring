@@ -10,7 +10,7 @@ const mvdir = require("mvdir");
 (async () => {
   const spinner = ora("building...\n").start();
 
-  const serverDistPath = path.resolve(__dirname, "../server/assets/dist");
+  const serverDistPath = path.resolve(__dirname, "../server/assets/demo");
 
   shell.exec("microbundle && npm run api:run && npm run api:doc");
 

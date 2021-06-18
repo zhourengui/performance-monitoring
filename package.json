@@ -28,6 +28,7 @@
     "@microsoft/api-extractor": "^7.15.2",
     "@types/css-font-loading-module": "^0.0.4",
     "chalk": "^4.1.1",
+    "git-webhook-handler": "^1.0.6",
     "husky": "^6.0.0",
     "microbundle": "^0.13.0",
     "mvdir": "^1.0.21",
