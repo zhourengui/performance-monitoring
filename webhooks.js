@@ -23,6 +23,7 @@ handler.on("push", function (event) {
     event.payload.ref
   );
 
+  shell.exec("pm2 delete app");
   shell.exec("git pull");
   shell.exec("pm2 start ./server/app.js");
 });

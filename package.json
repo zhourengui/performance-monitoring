@@ -1,55 +1,53 @@
 {
-  "name": "mini-pm",
-  "version": "1.0.8",
-  "description": "一款mini性能优化监控平台",
-  "source": "src/index.ts",
-  "main": "dist/mini-pm.js",
-  "exports": "./dist/mini-pm.modern.js",
-  "module": "dist/mini-pm.module.js",
-  "types": "dist/typings/index.d.ts",
-  "unpkg": "dist/mini-pm.umd.js",
-  "files": [
-    "dist"
-  ],
-  "scripts": {
-    "build": "node ./scripts/build.js",
-    "dev": "microbundle watch",
-    "example": "parcel serve ./examples/index.html -p 12345",
-    "api:init": "api-extractor init",
-    "api:run": "api-extractor run --local --verbose",
-    "api:doc": "typedoc --out docs src",
-    "publish": "node ./scripts/publish.js",
-    "test": "node ./scripts/sonar.js",
-    "precommit": "node ./scripts/precommit.js"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.14.0",
-    "@babel/plugin-transform-runtime": "^7.13.15",
-    "@microsoft/api-extractor": "^7.15.2",
-    "@types/css-font-loading-module": "^0.0.4",
-    "chalk": "^4.1.1",
-    "git-webhook-handler": "^1.0.6",
-    "husky": "^6.0.0",
-    "microbundle": "^0.13.0",
-    "mvdir": "^1.0.21",
-    "ora": "^5.4.1",
-    "parcel-bundler": "^1.12.5",
-    "rimraf": "^3.0.2",
-    "scripty": "^2.0.0",
-    "shelljs": "^0.8.4",
-    "typedoc": "^0.20.36",
-    "typescript": "4.2",
-    "yargs": "^17.0.1"
-  },
-  "dependencies": {
-    "fflate": "^0.7.0",
-    "performance": "^1.4.0",
-    "src": "^1.1.2",
-    "types": "^0.1.1"
-  },
-  "husky": {
-    "husky": {
-      "pre-commit": "npm run precommit"
-    }
-  }
+	"name": "mini-pm",
+	"version": "1.2.8",
+	"description": "一款mini性能优化监控平台",
+	"source": "src/index.ts",
+	"main": "dist/mini-pm.js",
+	"exports": "./dist/mini-pm.modern.js",
+	"module": "dist/mini-pm.module.js",
+	"types": "dist/typings/index.d.ts",
+	"unpkg": "dist/mini-pm.umd.js",
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"build": "node ./scripts/build.js",
+		"dev": "microbundle watch",
+		"example": "parcel serve ./examples/index.html -p 12345",
+		"api:init": "api-extractor init",
+		"api:run": "api-extractor run --local --verbose",
+		"api:doc": "typedoc --out docs src",
+		"publish": "node ./scripts/publish.js",
+		"test": "node ./scripts/sonar.js"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.14.0",
+		"@babel/plugin-transform-runtime": "^7.13.15",
+		"@microsoft/api-extractor": "^7.15.2",
+		"@types/css-font-loading-module": "^0.0.4",
+		"chalk": "^4.1.1",
+		"git-webhook-handler": "^1.0.6",
+		"microbundle": "^0.13.0",
+		"mvdir": "^1.0.21",
+		"ora": "^5.4.1",
+		"parcel-bundler": "^1.12.5",
+		"rimraf": "^3.0.2",
+		"scripty": "^2.0.0",
+		"shelljs": "^0.8.4",
+		"typedoc": "^0.20.36",
+		"typescript": "4.2",
+		"yargs": "^17.0.1"
+	},
+	"dependencies": {
+		"fflate": "^0.7.0",
+		"performance": "^1.4.0",
+		"src": "^1.1.2",
+		"types": "^0.1.1"
+	},
+	"husky": {
+		"husky": {
+			"pre-commit": "npm run precommit"
+		}
+	}
 }
