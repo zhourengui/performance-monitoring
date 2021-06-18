@@ -29,4 +29,6 @@ fs.writeFileSync(packPath, JSON.stringify(packJSON, null, "\t"));
 
 shell.exec(`expect ${expPath} ${account} ${password} ${email}`);
 
+shell.exec("npm publish");
+
 console.log(chalk.green("npm发布成功"));

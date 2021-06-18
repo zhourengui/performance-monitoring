@@ -3,6 +3,9 @@
 set account [lindex $argv 0]
 set password [lindex $argv 1]
 set eamil [lindex $argv 2]
+
+spawn bash -c "npm config set registry https://registry.npmjs.org"
+
 spawn bash -c "npm login"
 set timeout 30
 expect {
@@ -12,7 +15,7 @@ expect {
   "*Password:" { send "$password\r" }
 }
 expect {
-  "*Email: (this IS public):" { send "$eamil\r" }
+  "*Email: (this IS public)" { send "$eamil\r" }
 }
 
 interact
