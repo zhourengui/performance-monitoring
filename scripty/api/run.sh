@@ -1,1 +1,0 @@
-api-extractor run --local --verbose

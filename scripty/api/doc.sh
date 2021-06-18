@@ -1,1 +1,0 @@
-typedoc --out docs src

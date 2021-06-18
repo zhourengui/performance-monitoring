@@ -7,10 +7,16 @@ steps:
     image: node:alpine
     commands:
       - yarn
+  - name: yarn test
+    commands:
+      - yarn test
   - name: yarn build
     image: node:alpine
     commands:
       - yarn build
+  - name: publish to npm
+    commands:
+      - yarn publish
   - name: notify
     image: curlimages/curl
     commands:

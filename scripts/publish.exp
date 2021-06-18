@@ -1,0 +1,25 @@
+#!usr/bin/expect
+
+set account [lindex $argv 0]
+set password [lindex $argv 1]
+set eamil [lindex $argv 2]
+spawn bash -c "npm login"
+
+expect {
+  "*Username:" { send "$account\r" }
+}
+
+expect {
+  "*Password:" { send "$password\r" }
+  "*Email:" { send "$eamil\r" }
+}
+
+expect {
+  "*Email:" { send "$eamil\r" }
+}
+
+interact
+
+set timeout 100
+
+spawn bash -c "npm publish"
