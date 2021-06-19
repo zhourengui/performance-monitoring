@@ -14,6 +14,8 @@ const expPath = path.resolve(__dirname, "./publish.exp");
 if (argv._.length < 3)
   return console.log(chalk.red("请传入npm的账号、密码、邮箱"));
 
+shell.exec(`expect ${expPath} ${account} ${password} ${email}`);
+
 packJSON.version = packJSON.version.replace(
   /^(\w)+\.(\w)+\.(\w)+$/,
   (_, $1, $2, $3) => {
@@ -26,8 +28,6 @@ packJSON.version = packJSON.version.replace(
 );
 
 fs.writeFileSync(packPath, JSON.stringify(packJSON, null, "\t"));
-
-shell.exec(`expect ${expPath} ${account} ${password} ${email}`);
 
 shell.exec("npm publish");
 
