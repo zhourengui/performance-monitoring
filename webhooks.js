@@ -25,8 +25,10 @@ handler.on("push", function (event) {
   shell.exec("git pull");
   shell.exec("rm -rf ./node_modules");
   shell.exec("yarn");
+  shell.exec("cd ./server");
+  shell.exec("yarn");
   shell.exec("pm2 delete app");
-  shell.exec("pm2 start ./server/app.js");
+  shell.exec("pm2 start ./app.js");
 });
 
 handler.on("issues", function (event) {

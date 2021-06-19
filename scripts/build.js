@@ -22,5 +22,11 @@ const mvdir = require("mvdir");
 
   console.log(chalk.green("打包成功"));
 
+  shell.exec("git add ./");
+
+  shell.exec("git commit -m 'fix: fix server demo'");
+
+  shell.exec("git push");
+
   spinner.stop();
 })();
