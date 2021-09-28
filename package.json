@@ -19,7 +19,8 @@
     "api:run": "api-extractor run --local --verbose",
     "api:doc": "typedoc --out docs src",
     "publish": "node ./scripts/publish.js",
-    "test": "node ./scripts/sonar.js"
+    "test": "node ./scripts/sonar.js",
+    "sonar": "./sonar-scanner/bin/sonar-scanner -Dproject.settings=./sonar.properties"
   },
   "devDependencies": {
     "@babel/core": "^7.14.0",
